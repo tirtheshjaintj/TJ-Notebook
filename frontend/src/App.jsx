@@ -5,11 +5,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NoteState from './context/notes/NoteState';
-import Cookies from 'universal-cookie';
-
 export default function App() {
-  const cookies = new Cookies(); 
-
   return (
 // Context Added
 <NoteState>

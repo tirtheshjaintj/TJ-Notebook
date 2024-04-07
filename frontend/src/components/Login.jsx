@@ -8,7 +8,6 @@ export default function Login() {
     const host="http://localhost:8000";
     if(cookies.get('auth-token')){
         navigate("/");
-        console.log(cookies.get('auth-token'));
     }
     const handleSubmit=async (e)=>{
          e.preventDefault();
@@ -20,8 +19,10 @@ export default function Login() {
             body:JSON.stringify(cred)
           });
           const data=await response.json();
+          console.log(data);
+          document.getElementById("error").innerHTML=data.error;
           if(data.success){
-            cookies.set('auth-token',data.authtoken, { path: '/', 'sameSite': 'none', 'secure': 'true' });
+            cookies.set('auth-token',data.authtoken);
             console.log(cookies.get('auth-token')); // Pacman
             navigate("/");
           }
@@ -30,7 +31,9 @@ export default function Login() {
         setCred({ ...cred, [e.target.name]: e.target.value });
       }
   return (
+    
     <div className="container my-5">
+      <h1>Login To TJ Notebook</h1>
         <form onSubmit={handleSubmit} method="post">
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>
@@ -42,6 +45,7 @@ export default function Login() {
     <input type="password" onChange={onChange} value={cred.password}  className="form-control" name="password" id="password" required/>
   </div>
   <button type="submit" className="btn btn-primary">Submit</button>
+  <div id="error"></div>
 </form>
     </div>
   )

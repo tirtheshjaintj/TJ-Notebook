@@ -6,9 +6,10 @@ export default function Navbar(props) {
 const location = useLocation();
 const cookies = new Cookies();
 const navigate = useNavigate();
-if(cookies.get('auth-token')){
-  console.log(cookies.get('auth-token'));
-}
+
+// if(cookies.get('auth-token')){
+//   console.log(cookies.get('auth-token'));
+// }
 
 const logOut=()=>{
   console.log("Logout");
@@ -27,9 +28,6 @@ const logOut=()=>{
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className={`nav-link ${location.pathname==="/"?"active":""}`} aria-current="page" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link className={`nav-link ${location.pathname==="/about"?"active":""}`} aria-current="page" to="/about">About</Link>
               </li>
             </ul>
             <form className="d-flex">

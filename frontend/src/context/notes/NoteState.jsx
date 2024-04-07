@@ -1,32 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NoteContext from "./NoteContext";
 import Cookies from 'universal-cookie';
 
-const NoteState = (props) => {
+export default function NoteState(props) {
   const host="http://localhost:8000";
   const [notes, setNotes] = useState([]);
+  const cookies = new Cookies();
   //Fetching All Notes
   const getAllNotes=async ()=>{
     try{
+        const authtoken=cookies.get('auth-token');
+        if(authtoken){
+        console.log("GetAllNotes",authtoken);
       const response=await fetch(`${host}/api/notes/fetchall`,{
         method:'GET',
         headers:{
           'Content-Type':'application/json',
-          'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjYwMmM1NmE4MzY5MjFhNGY1ZGMwZDRjIn0sImlhdCI6MTcxMTcyNzcwOH0.V35Yba3VrX6Ixo6NNDYepj8rViqkuNda0K3wp9DYzro'
+          'auth-token':authtoken
         }
       });
       setNotes(await response.json());
+    }
     }
     catch(error){
       console.log(error);
     }
   }
-  const cookies = new Cookies();
-  const authtoken=cookies.get('auth-token');
 
   //Add a Note
   const addNote = async (note) => {
     try{
+      const authtoken=cookies.get('auth-token');
     const response=await fetch(`${host}/api/notes/addnote`,{
       method:'POST',
       headers:{
@@ -36,6 +40,7 @@ const NoteState = (props) => {
       body:JSON.stringify(note)
     });
     const data=await response.json();
+    console.log(data);
     console.log("Adding a new Note");
     const created_note = {
       "_id": `${data._id}`,
@@ -56,6 +61,7 @@ const NoteState = (props) => {
   //Deleting A Note using Its ID
   const deleteNote = async (id) => {
     console.log(id);
+    const authtoken=cookies.get('auth-token');
     const response=await fetch(`${host}/api/notes/deletenote/${id}`,{
       method:'DELETE',
       headers:{
@@ -108,4 +114,3 @@ const NoteState = (props) => {
     </NoteContext.Provider>
   )
 }
-export default NoteState;

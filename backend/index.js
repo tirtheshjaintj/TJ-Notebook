@@ -5,12 +5,12 @@ const app = express();
 require('dotenv').config();
 const port = processs.env.port || 8000;
 db();
-const corsOptions = {
-  origin: '',
-  methods:["POST","GET","PUT","PATCH","DELETE"],
-  credentials:true
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: '',
+//   methods:["POST","GET","PUT","PATCH","DELETE"],
+//   credentials:true
+// };
+app.use(cors());
 app.use(express.json());
 // Available Routes
 app.use('/api/auth', require('./routes/auth'))

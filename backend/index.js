@@ -4,7 +4,12 @@ var cors = require('cors') ;
 const app = express();
 const port = 8000;
 db();
-app.use(cors());
+const corsOptions = {
+  origin: 'https://tj-notebook.vercel.app',
+  methods:["POST","GET","PUT","PATCH","DELETE"],
+  credentials:true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 // Available Routes
 app.use('/api/auth', require('./routes/auth'))

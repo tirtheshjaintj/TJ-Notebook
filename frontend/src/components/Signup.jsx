@@ -6,7 +6,7 @@ export default function Signup() {
     const [cred,setCred]=useState({email:"",password:"",name:""});
     const navigate = useNavigate();
     const cookies = new Cookies();
-    const host="http://localhost:8000";
+    const host="https://tj-notebook-39fs.vercel.app/";
     if(cookies.get('auth-token')){
         navigate("/");
         console.log(cookies.get('auth-token'));

@@ -3,7 +3,7 @@ import NoteContext from "./NoteContext";
 import Cookies from 'universal-cookie';
 
 export default function NoteState(props) {
-  const host="http://localhost:8000";
+  const host="https://tj-notebook-39fs.vercel.app/";
   const [notes, setNotes] = useState([]);
   const cookies = new Cookies();
   //Fetching All Notes

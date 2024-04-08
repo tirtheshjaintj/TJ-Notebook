@@ -2,10 +2,11 @@ const db = require('./db');
 const express = require('express');
 var cors = require('cors') ;
 const app = express();
-const port = 8000;
+require('dotenv').config();
+const port = processs.env.port || 8000;
 db();
 const corsOptions = {
-  origin: 'https://tj-notebook.vercel.app',
+  origin: '',
   methods:["POST","GET","PUT","PATCH","DELETE"],
   credentials:true
 };

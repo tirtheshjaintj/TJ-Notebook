@@ -79,6 +79,7 @@ export default function NoteState(props) {
   //Editing A Note using its ID
   const editNote = async (id, title, description, tag) => {
     //TODO API Call
+    const authtoken=cookies.get('auth-token');
     try{
     const response=await fetch(`${host}/api/notes/updatenote/${id}`,{
       method:'PUT',

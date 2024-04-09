@@ -19,11 +19,10 @@ export default function Login() {
             body:JSON.stringify(cred)
           });
           const data=await response.json();
-          console.log(data);
           document.getElementById("error").innerHTML=data.error;
           if(data.success){
-            cookies.set('auth-token',data.authtoken);
-            console.log(cookies.get('auth-token')); // Pacman
+            // cookies.set('auth-token',data.authtoken);
+            cookies.set('auth-token', data.authtoken, {path: '/', expires: new Date(Date.now()+2592000)});
             navigate("/");
           }
     }
@@ -32,7 +31,7 @@ export default function Login() {
       }
   return (
     
-    <div className="container my-5">
+    <div className="container my-5 w-100 d-flex flex-column justify-content-center">
       <h1>Login To TJ Notebook</h1>
         <form onSubmit={handleSubmit} method="post">
   <div className="mb-3">

@@ -22,7 +22,7 @@ export default function Signup() {
           });
           const data=await response.json();
           console.log(data);
-          document.getElementById("error").innerHTML=data.error;
+          document.getElementById("error").innerHTML=data.error+" Error";
           if(data.authtoken){
             cookies.set('auth-token',data.authtoken, { path: '/' });
             console.log(cookies.get('auth-token')); // Pacman
@@ -47,7 +47,7 @@ export default function Signup() {
   </div>
   <div className="mb-3">
     <label htmlFor="password" className="form-label">Password</label>
-    <input type="password" onChange={onChange} value={cred.password}  className="form-control" name="password" id="password" required/>
+    <input type="password" onChange={onChange} minLength={6} value={cred.password}  className="form-control" name="password" id="password" required/>
   </div>
   <button type="submit" className="btn btn-primary">Submit</button>
   <div id="error"></div>

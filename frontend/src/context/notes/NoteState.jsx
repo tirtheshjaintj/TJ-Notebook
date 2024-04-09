@@ -11,7 +11,7 @@ export default function NoteState(props) {
     try{
         const authtoken=cookies.get('auth-token');
         if(authtoken){
-        console.log("GetAllNotes",authtoken);
+        // console.log("GetAllNotes",authtoken);
       const response=await fetch(`${host}/api/notes/fetchall`,{
         method:'GET',
         headers:{
@@ -23,7 +23,7 @@ export default function NoteState(props) {
     }
     }
     catch(error){
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -40,8 +40,7 @@ export default function NoteState(props) {
       body:JSON.stringify(note)
     });
     const data=await response.json();
-    console.log(data);
-    console.log("Adding a new Note");
+    // console.log("Adding a new Note");
     const created_note = {
       "_id": `${data._id}`,
       "user": `${data.user}`,
@@ -60,7 +59,7 @@ export default function NoteState(props) {
 
   //Deleting A Note using Its ID
   const deleteNote = async (id) => {
-    console.log(id);
+    // console.log(id);
     const authtoken=cookies.get('auth-token');
     const response=await fetch(`${host}/api/notes/deletenote/${id}`,{
       method:'DELETE',

@@ -2,11 +2,14 @@ import PropTypes from 'prop-types'
 import { Link, useLocation} from "react-router-dom";
 import Cookies from 'universal-cookie';
 import {useNavigate} from 'react-router-dom';
+import { useContext } from 'react';
+import noteContext from '../context/notes/NoteContext';
+
 export default function Navbar(props) {
 const location = useLocation();
 const cookies = new Cookies();
 const navigate = useNavigate();
-
+const {setNotes}=useContext(noteContext);
 // if(cookies.get('auth-token')){
 //   console.log(cookies.get('auth-token'));
 // }
@@ -14,6 +17,7 @@ const navigate = useNavigate();
 const logOut=()=>{
   console.log("Logout");
   cookies.remove('auth-token', { path: '/', 'sameSite': 'none', 'secure': 'true' });
+  setNotes([]);
   navigate("/login");
 }
   return (

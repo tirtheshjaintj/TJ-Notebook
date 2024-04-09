@@ -59,7 +59,6 @@ export default function NoteState(props) {
 
   //Deleting A Note using Its ID
   const deleteNote = async (id) => {
-    // console.log(id);
     const authtoken=cookies.get('auth-token');
     const response=await fetch(`${host}/api/notes/deletenote/${id}`,{
       method:'DELETE',

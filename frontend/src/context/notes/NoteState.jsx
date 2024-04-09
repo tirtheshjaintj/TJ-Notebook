@@ -30,7 +30,7 @@ export default function NoteState(props) {
   //Add a Note
   const addNote = async (note) => {
     try{
-      const authtoken=cookies.get('auth-token');
+    const authtoken=cookies.get('auth-token');
     const response=await fetch(`${host}/api/notes/addnote`,{
       method:'POST',
       headers:{
@@ -46,9 +46,7 @@ export default function NoteState(props) {
       "user": `${data.user}`,
       "title": `${note.title}`,
       "description": `${note.description}`,
-      "tag": `${note.tag}`,
-      "date": "2024-03-27T11:37:16.550Z",
-      "__v": 0
+      "tag": `${note.tag}`
     };
     setNotes(notes.concat(created_note));
   }
@@ -60,6 +58,11 @@ export default function NoteState(props) {
   //Deleting A Note using Its ID
   const deleteNote = async (id) => {
     const authtoken=cookies.get('auth-token');
+if(window.confirm("Are your Sure you want to delete this Note")){
+  const newNotes = notes.filter((note) => {
+    return note._id != id;
+  });
+  setNotes(newNotes);
     const response=await fetch(`${host}/api/notes/deletenote/${id}`,{
       method:'DELETE',
       headers:{
@@ -68,10 +71,7 @@ export default function NoteState(props) {
       }
     });
     // console.log("Deleting Note with id", id);
-    const newNotes = notes.filter((note) => {
-      return note._id != id;
-    });
-    setNotes(newNotes);
+  }
   }
 
   //Editing A Note using its ID

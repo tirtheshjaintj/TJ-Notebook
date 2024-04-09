@@ -8,7 +8,7 @@ export default function Home() {
   useEffect(()=>{
     console.log(cookies.get('auth-token'));
     if(!cookies.get('auth-token')){
-      navigate("/login");
+      navigate("/signup");
     }
   }) 
   return (

@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import Cookies from 'universal-cookie';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 export default function Login() {
     const [cred,setCred]=useState({email:"",password:""});
     const navigate = useNavigate();
@@ -46,6 +46,8 @@ export default function Login() {
   <button type="submit" className="btn btn-primary">Submit</button>
   <div id="error"></div>
 </form>
+<br /><br />
+<Link to="/signup">Do you wanna signup?</Link>
     </div>
   )
 }

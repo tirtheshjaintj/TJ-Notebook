@@ -11,9 +11,9 @@ export default function NoteState(props) {
   //Fetching All Notes
   const getAllNotes=async ()=>{
     try{
-        setProgress(90);
         const authtoken=cookies.get('auth-token');
         if(authtoken){
+          setProgress(90);
         // console.log("GetAllNotes",authtoken);
       const response=await fetch(`${host}/api/notes/fetchall`,{
         method:'GET',
@@ -63,9 +63,9 @@ export default function NoteState(props) {
 
   //Deleting A Note using Its ID
   const deleteNote = async (id) => {
-    setProgress(90);
-    const authtoken=cookies.get('auth-token');
+const authtoken=cookies.get('auth-token');
 if(window.confirm("Are your Sure you want to delete this Note")){
+  setProgress(90);
   const newNotes = notes.filter((note) => {
     return note._id != id;
   });

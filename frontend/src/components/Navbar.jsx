@@ -4,24 +4,26 @@ import Cookies from 'universal-cookie';
 import {useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import noteContext from '../context/notes/NoteContext';
+import LoadingBar from 'react-top-loading-bar';
 
 export default function Navbar(props) {
 const location = useLocation();
 const cookies = new Cookies();
 const navigate = useNavigate();
-const {setNotes}=useContext(noteContext);
+const {setNotes,progress}=useContext(noteContext);
 // if(cookies.get('auth-token')){
 //   console.log(cookies.get('auth-token'));
 // }
 
 const logOut=()=>{
-  console.log("Logout");
+  // console.log("Logout");
   cookies.remove('auth-token', { path: '/', 'sameSite': 'none', 'secure': 'true' });
   setNotes([]);
   navigate("/login");
 }
   return (
     <>
+    <LoadingBar color='#f11946' height={4} progress={progress}/>
           <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">TJ Notebook</Link>

@@ -6,7 +6,7 @@ export default function Home() {
   const cookies = new Cookies();
   const navigate=new useNavigate();
   useEffect(()=>{
-    console.log(cookies.get('auth-token'));
+    // console.log(cookies.get('auth-token'));
     if(!cookies.get('auth-token')){
       navigate("/signup");
     }

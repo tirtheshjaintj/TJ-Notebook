@@ -9,7 +9,7 @@ export default function Notes() {
   const [note, setNote] = useState({ title: "", description: "", tag: "", _id: "" });
   useEffect(() => {
   getAllNotes();
-  console.log("Auth Token");
+  // console.log("Auth Token");
   }, []);
 
   const ref = useRef(null);
@@ -21,7 +21,7 @@ export default function Notes() {
   const handleClick = (e) => {
     e.preventDefault();
     editNote(note._id,note.title,note.description,note.tag);
-    console.log("Updating note",note);
+    // console.log("Updating note",note);
     refclose.current.click();
   }
 
@@ -70,7 +70,6 @@ export default function Notes() {
 
       <h2>Your Notes</h2>
       <div className="row container">
-        {console.log(notes)}
         {notes.length===0 && 'No notes to display'}
         {
           notes.map((note) => {

@@ -10,11 +10,9 @@ export default function App() {
 // Context Added
 <NoteState>
 {/* NoteContext */}
-
 <Router>
 {/* Navbar Added */}
 <Navbar/>
-
 <Routes>
 <Route exact path="/" element={<Home/>}/>
 <Route exact path="/about" element={<About/>}/>
@@ -22,7 +20,6 @@ export default function App() {
 <Route exact path="/signup" element={<Signup/>}/>
 </Routes>
 </Router>
-
 </NoteState>
   )
 }

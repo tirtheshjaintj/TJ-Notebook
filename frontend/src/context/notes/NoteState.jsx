@@ -5,10 +5,13 @@ import Cookies from 'universal-cookie';
 export default function NoteState(props) {
   const host="https://tj-notebook.vercel.app";
   const [notes, setNotes] = useState([]);
+  const [progress,setProgress]=useState(0);
+
   const cookies = new Cookies();
   //Fetching All Notes
   const getAllNotes=async ()=>{
     try{
+        setProgress(90);
         const authtoken=cookies.get('auth-token');
         if(authtoken){
         // console.log("GetAllNotes",authtoken);
@@ -20,6 +23,7 @@ export default function NoteState(props) {
         }
       });
       setNotes(await response.json());
+      setProgress(100);
     }
     }
     catch(error){
@@ -30,6 +34,7 @@ export default function NoteState(props) {
   //Add a Note
   const addNote = async (note) => {
     try{
+      setProgress(90);
     const authtoken=cookies.get('auth-token');
     const response=await fetch(`${host}/api/notes/addnote`,{
       method:'POST',
@@ -49,6 +54,7 @@ export default function NoteState(props) {
       "tag": `${note.tag}`
     };
     setNotes(notes.concat(created_note));
+    setProgress(100);
   }
   catch(error){
     console.error(error);
@@ -57,6 +63,7 @@ export default function NoteState(props) {
 
   //Deleting A Note using Its ID
   const deleteNote = async (id) => {
+    setProgress(90);
     const authtoken=cookies.get('auth-token');
 if(window.confirm("Are your Sure you want to delete this Note")){
   const newNotes = notes.filter((note) => {
@@ -70,6 +77,7 @@ if(window.confirm("Are your Sure you want to delete this Note")){
         'auth-token':authtoken
       }
     });
+    setProgress(100);
     // console.log("Deleting Note with id", id);
   }
   }
@@ -79,6 +87,7 @@ if(window.confirm("Are your Sure you want to delete this Note")){
     //TODO API Call
     const authtoken=cookies.get('auth-token');
     try{
+    setProgress(90);
     const response=await fetch(`${host}/api/notes/updatenote/${id}`,{
       method:'PUT',
       headers:{
@@ -100,7 +109,7 @@ if(window.confirm("Are your Sure you want to delete this Note")){
       }
     }
     setNotes(newNotes);
-
+    setProgress(100);
   }
   catch(error){
     console.error(error);
@@ -108,7 +117,7 @@ if(window.confirm("Are your Sure you want to delete this Note")){
   }
 
   return (
-    <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, editNote ,getAllNotes}}>
+    <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, editNote ,getAllNotes,progress,setProgress}}>
       {props.children}
     </NoteContext.Provider>
   )
